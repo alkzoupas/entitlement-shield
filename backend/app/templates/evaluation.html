@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Evaluation — EntitlementShield{% endblock %}
+{% block content %}
+<h1>Evaluation</h1>
+
+{% if not report %}
+<div class="panel">
+  <p class="muted">No evaluation report found at <code>{{ report_path }}</code>.</p>
+  <p class="muted">Generate one (dev tier): <code>make eval-json</code>.</p>
+</div>
+{% else %}
+<div class="panel">
+  <dl class="kv">
+    <dt>As of</dt><dd class="mono">{{ report.as_of }}</dd>
+    <dt>Split</dt><dd>{{ report.split }}</dd>
+    <dt>Rows</dt><dd>{{ report.rows }}</dd>
+    <dt>Manifest hash</dt><dd class="mono">{{ report.feature_manifest_hash[:16] }}…</dd>
+    <dt>Generated</dt><dd class="muted">{{ report.generated_at }}</dd>
+  </dl>
+</div>
+<div class="panel">
+  <h2>Arms</h2>
+  <table>
+    <thead>
+      <tr><th>Arm</th><th>Precision</th><th>Recall</th><th>FPR</th><th>PR-AUC</th>
+          <th>Wrongful restr.</th></tr>
+    </thead>
+    <tbody>
+      {% for a in report.arms %}
+      <tr>
+        <td>{{ a.label }} <span class="muted mono">({{ a.arm }})</span></td>
+        <td>{{ "%.3f"|format(a.precision) }}</td>
+        <td>{{ "%.3f"|format(a.recall) }}</td>
+        <td>{{ "%.3f"|format(a.fpr) }}</td>
+        <td>{{ "%.3f"|format(a.pr_auc) }}</td>
+        <td>{{ "%.3f"|format(a.wrongful_restriction) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="muted" style="margin-top:.6rem; font-size:.8rem">
+    Dev-tier harness output — mechanics only. Reported numbers come from the sealed
+    Tier-2 world in a later, gated phase (W-1).</p>
+</div>
+{% endif %}
+{% endblock %}

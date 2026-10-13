@@ -1,0 +1,36 @@
+# EntitlementShield — reviewer LLM provider selection (Phase 4, docs/decisions.md
+# §13 M-5). Secrets are NEVER stored here — only the name of the environment
+# variable to read at call time.
+#
+# `active` selects which block below is actually used. Set to `openai_compatible`
+# right now to point at a local model server; switch to `anthropic` once a real
+# API key exists, or to `fake` to fall back to the deterministic test provider.
+active: openai_compatible
+
+anthropic:
+  model: claude-haiku-4-5
+  api_key_env: ANTHROPIC_API_KEY
+  timeout_s: 30.0
+
+openai_compatible:
+  # MTPLX local model server (Phase 4 P4.5) — live-verified. This is an
+  # OpenAI-compatible chat-completions endpoint; the same adapter works for a
+  # real hosted OpenAI endpoint by changing base_url/model/api_key_env below
+  # (and dropping extra_body, which is a vendor-specific extension).
+  model: qwen3-coder-30b-a3b-instruct
+  base_url: http://127.0.0.1:8000/v1
+  api_key_env: OPENAI_API_KEY  # unused by this local server; required for a real hosted endpoint
+  timeout_s: 120.0
+  # P4.8 finding: this server's model defaults to "thinking" mode, which spends
+  # the entire max_tokens budget on hidden reasoning_content and returns EMPTY
+  # content on every real reviewer prompt (verified live: 30/30 calls hit
+  # completion_tokens==max_tokens with content=""). chat_template_kwargs is a
+  # vLLM/SGLang-family passthrough (this MTPLX server included) that disables
+  # it; drop this block entirely for a real hosted OpenAI endpoint, which would
+  # reject the unrecognized field.
+  extra_body:
+    chat_template_kwargs:
+      enable_thinking: false
+
+fake:
+  mode: normal

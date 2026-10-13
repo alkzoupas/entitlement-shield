@@ -1,0 +1,13 @@
+{
+  "config_sha256": "2b7f1f2533248f2852f9843f9966dce76b6a44bafa24f9c04890f8630f2535d3",
+  "decision": "P6 pilot (open scope)",
+  "detected_store_sha256": "7a9278bcd1d14f26a695b14dc19767c11f9d77fefa6f129837865d87e11cd89a",
+  "prompt_version": "recall-v1",
+  "provider": {
+    "model_snapshot": "mtplx-qwen35-9b-optimized-speed",
+    "provider_id": "openai_compatible"
+  },
+  "runner_sha256": "3600a6e55b269ed1e428d359eb007cfea496187bbef907af282d45b6a134baa5",
+  "system_prompt_sha256": "78a0037a0d7419f78572a0ba2f8423e0d66c6b68aa47dc3bf28d2e000f17432d",
+  "threshold": 0.6
+}

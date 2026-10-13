@@ -1,0 +1,86 @@
+{
+  "auto_apply_thresholds": {
+    "actor": "llm",
+    "ceiling_action": "light_friction",
+    "ceiling_rule": "R-6: the decision's ORIGINAL proposed_action severity must itself be at or below light_friction \u2014 not merely the model's clamped recommendation, which derive_effect already bounds there",
+    "requires_no_other_actioned_cluster_member": true,
+    "requires_unanimous_reverse": true
+  },
+  "content_hash": "ae358653be828f4dc58d0ba636004b335a96eafe391c4a17a40ab32d17d8d1cc",
+  "fake_reviewer_rule_table": {
+    "action_ladder": [
+      "allow",
+      "light_friction",
+      "hold_incremental_credits"
+    ],
+    "bucket_rule": "(seed + variant) % len(action_ladder)",
+    "citation_mechanism": "cites evidence_keys[0] verbatim; raises ValueError rather than fabricating a fallback citation when the allowlist is empty",
+    "confidence": 0.9,
+    "disagree_variant_offsets": [
+      0,
+      0,
+      1
+    ],
+    "escalate_to_human": false,
+    "seed_mechanism": "int(sha256(structured_evidence_segment_text)[:16], 16) \u2014 stable across processes and PYTHONHASHSEED, keyed on case identity because the structured payload embeds decision_id. The untrusted appeal block is located only to be skipped and never reaches the rule table."
+  },
+  "gating_rule": {
+    "arm_views": {
+      "arm4_reviewer": {
+        "prompt_variant": "reviewer_v1",
+        "prompt_version": "reviewer_v1",
+        "view": "full"
+      },
+      "arm4b_timeline_only": {
+        "prompt_variant": "reviewer_timeline_only_v1",
+        "prompt_version": "reviewer_timeline_only_v1",
+        "view": "timeline_only"
+      },
+      "reviewer": {
+        "prompt_variant": "reviewer_v1",
+        "prompt_version": "reviewer_v1",
+        "view": "full"
+      }
+    },
+    "citation_rule": "C-2: citations are kept only if they resolve against the case's evidence_keys allowlist; unresolved citations move to unverified_claims and a verdict with zero valid citations can never reverse",
+    "cluster_blast_radius_rule": "L-3/RC-1 P1-1: auto-apply is blocked whenever another currently-actioned decision shares this decision's cluster_snapshot_id AND its exact policy_engine.evidence_signature; both signatures are derived from the raw persisted decision_evidence payload, never from the ReviewCase projection",
+    "combination_rule": "strict unanimity (C-5): all samples must derive the same effect; any disagreement escalates, regardless of majority",
+    "escalate_rule": "L-5: an escalate outcome is a real state transition (under_review + an EscalationRecord with a 7-day window), not a label on the LlmReview rows",
+    "invokes_on": "any decision with proposed_action != allow",
+    "max_repair_retries": 1,
+    "repair_retry_rule": "R-7: exactly one repair retry per sample before failing closed to escalate; every attempt is persisted as its own LlmReview row",
+    "samples_per_decision": 3,
+    "severity_clamp_rule": "C-4: the model's recommended_action is clamped to min(model, policy_proposed_action) over policy_engine.ACTION_SEVERITY",
+    "skip_conditions": [
+      "proposed_action == allow",
+      "status in {reversed, superseded} (terminal)",
+      "status == under_review with an open EscalationRecord",
+      "status == under_review without one (already_under_review)",
+      "evidence signature is under a live SuppressionRecord"
+    ]
+  },
+  "manifest_version": "reviewer-manifest-v1",
+  "output_schema": {
+    "bytes": 1588,
+    "sha256": "27e1c689a3f1b7f0c42be14846bf28581961d2b79d2f35baf8e550115a8fd9fd"
+  },
+  "prompt_templates": {
+    "reviewer_timeline_only_v1": {
+      "bytes": 2122,
+      "sha256": "75e25bd40a3d9952ae26b3f0cdf76b06b06c4cdda075398579fd158db6ec8d85"
+    },
+    "reviewer_v1": {
+      "bytes": 1863,
+      "sha256": "4d95c5f1f86dfe7668a4c544065a7644a92453aa1a4881ca9f57a8784fce5b7f"
+    }
+  },
+  "provider": {
+    "model_snapshot": "qwen3-coder-30b-a3b-instruct",
+    "provider_id": "openai_compatible"
+  },
+  "reviewer_code_fingerprint": "351d014387d60c24f62d020f924d5b1f58d8548097c04634c5e4793ab4764566",
+  "sampling": {
+    "sample_count": 3,
+    "temperature": 0.0
+  }
+}

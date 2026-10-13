@@ -1,0 +1,31 @@
+# Demo-scoped reviewer provider override (Phase 5 Track 2, `make demo`; P5.4).
+#
+# The committed `config/reviewer-provider.yaml` currently has `active:
+# openai_compatible`, pointing at a local model server on :8000. `make demo`
+# points `REVIEWER_PROVIDER_CONFIG_PATH` at this file instead (see
+# `app/providers/factory.load_provider_config`). This file is never the default
+# and never read unless that env var is set (or passed explicitly, e.g.
+# `scripts/arm4_run.py --provider-config`) — the committed `active:` is untouched.
+#
+# P5.4 (owner decision, 2026-09-25): TypeSafe Jev replaces Haiku as the arm-4/4b
+# checker. Jev is a calibrated decision model, not a text generator: the adapter
+# (`app/providers/typesafe_provider.py`) asks typed questions and assembles the
+# reviewer verdict in code, so the narrative panel shows Jev's typed answers and
+# probabilities in code-assembled wording, never model prose. Needs
+# `TYPESAFE_API_KEY` exported. The model is pinned to a version id rather than
+# `jev-latest` so the reviewer manifest hashes what actually answered.
+# Switch `active` to `fake` for a network-free, zero-spend demo run.
+active: typesafe
+
+typesafe:
+  model: jev-1.13.0
+  api_key_env: TYPESAFE_API_KEY
+  timeout_s: 30.0
+
+anthropic:
+  model: claude-haiku-4-5
+  api_key_env: ANTHROPIC_API_KEY
+  timeout_s: 30.0
+
+fake:
+  mode: normal

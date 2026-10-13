@@ -1,0 +1,15 @@
+# Reviewed 2026-10-12: false positives. Each is a 20-char hex synthetic appeal id used as a
+# dict key for generated appeal text (data/tier4-v2), not a credential.
+# History scan (gitleaks detect):
+ac8c12797100d70ac46fe716d1fe73d6aee3a664:data/tier4-v2/appeal-texts.json:generic-api-key:35
+ac8c12797100d70ac46fe716d1fe73d6aee3a664:data/tier4-v2/appeal-texts.json:generic-api-key:70
+ac8c12797100d70ac46fe716d1fe73d6aee3a664:data/tier4-v2/generator.py:generic-api-key:794
+ac8c12797100d70ac46fe716d1fe73d6aee3a664:data/tier4-v2/generator.py:generic-api-key:910
+# Directory scan of the history-free export (gitleaks dir):
+data/tier4-v2/appeal-texts.json:generic-api-key:35
+data/tier4-v2/appeal-texts.json:generic-api-key:70
+data/tier4-v2/generator.py:generic-api-key:794
+data/tier4-v2/generator.py:generic-api-key:910
+# Reviewed 2026-10-12: false positive. Replay-cache key = first 16 hex chars of a sha256
+# request fingerprint plus a call index (backend/app/providers/cache.py), not a credential.
+data/tier4-v2/runs/p5-7-live-2/raw/transcript.jsonl:generic-api-key:1130

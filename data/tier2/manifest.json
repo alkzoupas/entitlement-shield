@@ -1,0 +1,46 @@
+{
+  "schema_version": "tier2-brief-v1.0",
+  "world_version": "world-v1",
+  "author_model": "anthropic/claude-sonnet \u2014 stand-in for qwen per docs/tier2-decisions.md; SAME model family as the detector designer, so the two-tier model-family coupling is NOT broken",
+  "seed": 20260902,
+  "world_end": "2026-06-30T00:00:00Z",
+  "accepted_families": [
+    "Household Shared Device",
+    "Sequential Household Users",
+    "Shared Public Kiosk / Library Terminal",
+    "Small Business Turnover",
+    "Account Recovery Migration",
+    "Roommate Turnover",
+    "Classroom / Course Cohort",
+    "Trial Credit Farm",
+    "Serial Reroll on Expiry",
+    "Credit Mule Ring",
+    "Device Reseller Fleet",
+    "Co-working Hot Desk",
+    "Boarding-School / Long-Distance Family",
+    "Referral / Viral Signup Burst",
+    "Verification-Avoidant Privacy Cluster",
+    "Slow-Burn Multi-Account Hoarder"
+  ],
+  "counts": {
+    "accounts": 1890,
+    "clusters": 308,
+    "events": 80855,
+    "linkage_observations": 3488,
+    "cycles": 13101,
+    "entitlement_cycles": 13101,
+    "clusters_by_label": {
+      "abusive": 38,
+      "ambiguous": 80,
+      "legitimate": 190
+    }
+  },
+  "checksums": {
+    "accounts.parquet": "86095473c9dcc8cd1d4e66ce0f76554c8c66607fc44ddea54acb47b7aab6c6f2",
+    "account_events.parquet": "ad50910519adc600e4dafe7a3cb0cfea2f81e37c850ac86f155fa318153de576",
+    "linkage_observations.parquet": "bce28284334ab5da03714eb99590feceba5495064de18e81bcd5582c8acb7cc7",
+    "ground_truth.parquet": "f55c749f44b8c5b610cb89fd2b49c7a06efbc8704f7e97fffafcfb10a50dd006",
+    "cluster_membership.parquet": "27404d3a6f3af181c753bbb8233e2f4da6a55f51be7c1a2b320de9eb86603728",
+    "entitlement_cycles.parquet": "8088b48840f8d7a411aa19d12bb384e89fb33c446cbeaf5337e8f573de864939"
+  }
+}

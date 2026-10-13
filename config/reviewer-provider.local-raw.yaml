@@ -1,0 +1,16 @@
+# P5-8 (docs/decisions.md, pending): local-model appeals-off arm for the Tier 4 v2
+# comparison. Same model, prompt, sampling and mapping in both arms; the only
+# difference is `appeals`: "omit" renders every appeal as absent, "include" shows it
+# as the neutralised untrusted block. Only read when passed explicitly. Local and free.
+active: openai_compatible
+
+openai_compatible:
+  model: mtplx-qwen38-27b-optimized-speed
+  base_url: http://127.0.0.1:8000/v1
+  api_key_env: OPENAI_API_KEY  # unused by the local server
+  timeout_s: 1800.0
+  appeals: omit
+  # P4.8: thinking mode spends the whole budget on hidden reasoning; keep it off.
+  extra_body:
+    chat_template_kwargs:
+      enable_thinking: false

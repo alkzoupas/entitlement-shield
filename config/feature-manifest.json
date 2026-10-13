@@ -1,0 +1,289 @@
+{
+  "content_hash": "fe21a7b052bea913fcbb880037a85c022d0e2be9d855a426bd449f60172a2021",
+  "feature_order": [
+    "F-DEV-1",
+    "F-DEV-2",
+    "F-PAY-1",
+    "F-CON-1",
+    "F-DOM-1",
+    "F-VER-1",
+    "F-CYC-1",
+    "F-CYC-2",
+    "F-CYC-3",
+    "F-CYC-4",
+    "F-DOM-2",
+    "F-AGE-1"
+  ],
+  "features": {
+    "F-AGE-1": {
+      "ablation_rung": "S0",
+      "cap": null,
+      "evidence_family": null,
+      "family_name": null,
+      "firing_predicate": ">= {majority} of the cluster are aged >= {age_days} d at the cycle boundary with routine activity (>= {min_logins} LOGINs)",
+      "firing_threshold": 0.05,
+      "id": "F-AGE-1",
+      "inputs": [
+        "account created_at",
+        "LOGIN events",
+        "cycle-boundary reference"
+      ],
+      "missing_value_semantics": "empty cluster -> size floored at 1 -> 0.0",
+      "predicate_params": {
+        "age_days": 90,
+        "majority": 0.5,
+        "min_logins": 2
+      },
+      "scaling": "indicator(predicate) x weight; raw_value = fraction qualifying (the fraction is reported, NOT multiplied into the contribution)",
+      "sign": "-",
+      "weight": -0.15
+    },
+    "F-CON-1": {
+      "ablation_rung": "S1",
+      "cap": null,
+      "evidence_family": 3,
+      "family_name": "contact_domain",
+      "firing_predicate": "a recovery_contact value shared by >= 2 cluster members",
+      "firing_threshold": 0.05,
+      "id": "F-CON-1",
+      "inputs": [
+        "recovery_contact shared-value presence"
+      ],
+      "missing_value_semantics": "no shared recovery contact -> 0.0 (does not fire)",
+      "predicate_params": {},
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.25
+    },
+    "F-CYC-1": {
+      "ablation_rung": "S2",
+      "cap": 0.3,
+      "evidence_family": 4,
+      "family_name": "cycle",
+      "firing_predicate": "allowance excess = max(0, claimed/allowance - 1); fires when the scaled contribution reaches the firing threshold",
+      "firing_threshold": 0.05,
+      "id": "F-CYC-1",
+      "inputs": [
+        "cycle-window claimed credits",
+        "banded allowance"
+      ],
+      "missing_value_semantics": "allowance == 0 -> excess 0.0 (does not fire)",
+      "predicate_params": {},
+      "scaling": "weight x min(1.0, excess)  (excess curve, linear-then-clamped)",
+      "sign": "+",
+      "weight": 0.3
+    },
+    "F-CYC-2": {
+      "ablation_rung": "S2",
+      "cap": null,
+      "evidence_family": 4,
+      "family_name": "cycle",
+      "firing_predicate": ">= 2 members consume but no consumption day is shared (sequential tiling)",
+      "firing_threshold": 0.05,
+      "id": "F-CYC-2",
+      "inputs": [
+        "per-account consumption days (trailing window)"
+      ],
+      "missing_value_semantics": "< 2 consuming members -> 0.0 (does not fire)",
+      "predicate_params": {},
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.15
+    },
+    "F-CYC-3": {
+      "ablation_rung": "S2",
+      "cap": null,
+      "evidence_family": 4,
+      "family_name": "cycle",
+      "firing_predicate": "within the trailing {recency_days} d ending at as_of, a linked account signs up <= {latency_hours} h after another linked account exhausts its half-open cycle",
+      "firing_threshold": 0.05,
+      "id": "F-CYC-3",
+      "inputs": [
+        "cycle exhaustion times",
+        "SIGNUP timestamps",
+        "as_of"
+      ],
+      "missing_value_semantics": "no exhaustion or signup in the trailing recency window -> 0.0",
+      "predicate_params": {
+        "cycle_ownership": "[cycle_start, cycle_end)",
+        "latency_hours": 72,
+        "recency_days": 60
+      },
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.1
+    },
+    "F-CYC-4": {
+      "ablation_rung": "S2",
+      "cap": null,
+      "evidence_family": 4,
+      "family_name": "cycle",
+      "firing_predicate": "this member set had an identical pattern UPHELD (APPLIED) in a prior decision (reversed decisions never count)",
+      "firing_threshold": 0.05,
+      "id": "F-CYC-4",
+      "inputs": [
+        "prior APPLIED decisions",
+        "cluster member set"
+      ],
+      "missing_value_semantics": "no matching upheld prior decision -> 0.0",
+      "predicate_params": {},
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.1
+    },
+    "F-DEV-1": {
+      "ablation_rung": "S1",
+      "cap": null,
+      "evidence_family": 1,
+      "family_name": "device",
+      "firing_predicate": "a stable_device value shared by >= {min_members} cluster members at {reliability} effective reliability",
+      "firing_threshold": 0.05,
+      "id": "F-DEV-1",
+      "inputs": [
+        "stable_device shared-value member count",
+        "effective reliability"
+      ],
+      "missing_value_semantics": "no qualifying shared value -> 0.0 (does not fire)",
+      "predicate_params": {
+        "min_members": 3,
+        "reliability": "HIGH"
+      },
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.45
+    },
+    "F-DEV-2": {
+      "ablation_rung": "S1",
+      "cap": null,
+      "evidence_family": 1,
+      "family_name": "device",
+      "firing_predicate": "a stable_device value shared by exactly {members} members OR at {reliability} reliability (weak share)",
+      "firing_threshold": 0.05,
+      "id": "F-DEV-2",
+      "inputs": [
+        "stable_device shared-value member count",
+        "effective reliability"
+      ],
+      "missing_value_semantics": "no qualifying shared value -> 0.0 (does not fire)",
+      "predicate_params": {
+        "members": 2,
+        "reliability": "MEDIUM"
+      },
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.15
+    },
+    "F-DOM-1": {
+      "ablation_rung": "S0",
+      "cap": null,
+      "evidence_family": 3,
+      "family_name": "contact_domain",
+      "firing_predicate": "at least one member (S1/S2 cluster aggregate) / the any-restriction representative account (S0) has a disposable email domain",
+      "firing_threshold": 0.05,
+      "id": "F-DOM-1",
+      "inputs": [
+        "account email_domain_type"
+      ],
+      "missing_value_semantics": "domain not disposable / account absent as-of -> 0.0",
+      "predicate_params": {},
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.25
+    },
+    "F-DOM-2": {
+      "ablation_rung": "S0",
+      "cap": null,
+      "evidence_family": null,
+      "family_name": null,
+      "firing_predicate": ">= {majority} of the cluster are education/enterprise domains with routine activity (>= {min_logins} LOGINs)",
+      "firing_threshold": 0.05,
+      "id": "F-DOM-2",
+      "inputs": [
+        "account email_domain_type",
+        "LOGIN events"
+      ],
+      "missing_value_semantics": "empty cluster -> size floored at 1 -> 0.0",
+      "predicate_params": {
+        "majority": 0.5,
+        "min_logins": 2
+      },
+      "scaling": "indicator(predicate) x weight; raw_value = fraction qualifying (the fraction is reported, NOT multiplied into the contribution)",
+      "sign": "-",
+      "weight": -0.15
+    },
+    "F-PAY-1": {
+      "ablation_rung": "S1",
+      "cap": null,
+      "evidence_family": 2,
+      "family_name": "payment",
+      "firing_predicate": "a payment_token value shared by >= 2 cluster members",
+      "firing_threshold": 0.05,
+      "id": "F-PAY-1",
+      "inputs": [
+        "payment_token shared-value presence"
+      ],
+      "missing_value_semantics": "no shared payment token -> 0.0 (does not fire)",
+      "predicate_params": {},
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.2
+    },
+    "F-VER-1": {
+      "ablation_rung": "S0",
+      "cap": null,
+      "evidence_family": 5,
+      "family_name": "verification",
+      "firing_predicate": ">= {failure_min} VERIFICATION_FAILED events, OR a CLAIM_CREDITS strictly before the first verification (claim-before-verify)",
+      "firing_threshold": 0.05,
+      "id": "F-VER-1",
+      "inputs": [
+        "verification event stream"
+      ],
+      "missing_value_semantics": "no claim and no failures -> 0.0 (does not fire)",
+      "predicate_params": {
+        "failure_min": 2
+      },
+      "scaling": "indicator {0,1} x weight",
+      "sign": "+",
+      "weight": 0.15
+    }
+  },
+  "firing_code_fingerprint": "f8cb18fdccc4df9c7a9a7f39c4419a3e48d88b6adab34df7059df28fd6db02cc",
+  "firing_config": {
+    "banding": {
+      "ambiguity_fraction": 0.2,
+      "diurnal_d": 0.15,
+      "diurnal_d_high": 0.18,
+      "diurnal_d_low": 0.12,
+      "large_shared_min": 6,
+      "n_overlap": 3,
+      "per_stream_allowance": 25,
+      "rate_daily_credits": 20,
+      "rate_daily_min_days": 2,
+      "rate_hourly_credits": 8,
+      "rate_hourly_min_hours": 2,
+      "small_group_min": 2,
+      "window_days": 60
+    },
+    "clustering": {
+      "decay_halflife_days": 90.0,
+      "hub_account_threshold": 20,
+      "louvain_seed": 7,
+      "max_age_days": 365,
+      "max_component_size": 50,
+      "reliability_weight": {
+        "HIGH": 1.0,
+        "LOW": 0.3,
+        "MEDIUM": 0.6
+      },
+      "resource_sharing_signals": [
+        "payment_token",
+        "recovery_contact",
+        "stable_device"
+      ]
+    }
+  },
+  "firing_threshold": 0.05,
+  "manifest_version": "features-frozen-v2",
+  "masking_aggregation_version": "v1"
+}

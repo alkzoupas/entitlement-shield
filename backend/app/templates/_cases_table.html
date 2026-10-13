@@ -1,0 +1,19 @@
+<table id="cases-table">
+  <thead>
+    <tr><th>Decision</th><th>Account</th><th>Risk</th><th>Action</th><th>Status</th><th>Created</th></tr>
+  </thead>
+  <tbody>
+    {% for c in cases %}
+    <tr>
+      <td class="mono"><a href="/cases/{{ c.decision_id }}">{{ c.decision_id[:12] }}…</a></td>
+      <td class="mono muted">{{ c.account_id[:16] }}…</td>
+      <td>{{ "%.3f"|format(c.risk_score) }}</td>
+      <td>{{ c.proposed_action }}</td>
+      <td><span class="pill s-{{ c.status }}">{{ c.status }}</span></td>
+      <td class="muted">{{ c.created_at }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="muted">No cases match these filters.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

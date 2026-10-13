@@ -1,0 +1,49 @@
+{
+  "author_model": "GPT-6 (Codex)",
+  "checksums": {
+    "account_events.parquet": "71964effe9383cfc4684be4f6ef454f3f714d704bc34a95988c2ae78573e39e0",
+    "accounts.parquet": "58cb621fbac2d35f38af6d8dfe4da3ad444ebb4870f44b7575f4a1ef88b4f70b",
+    "appeal_truth.parquet": "584a5965e832449cf1b66fe0e2786afd2e2187d2b23abb333b94d579339ff53e",
+    "appeals.parquet": "4813b22d90d05a5bfdf416ddd4a5b9eee4dba448277cdfb3f50cee8a10b0c71d",
+    "cluster_membership.parquet": "3e9839dafe079d23ebffb49ceb4ce1b9f16c5a94ff8eac02872fce711d1d5077",
+    "entitlement_cycles.parquet": "8233196c64ac0543cce6abb3ee3c52fc7ce4365af74ffb9c380ea27254289b2b",
+    "ground_truth.parquet": "08c62ddced3d89de3dc40bc1deca42eb82e46fc64c6d4daae2565614f72b4081",
+    "linkage_observations.parquet": "a0bdbb895dbbb2441672ea6517a7336662c994d67e76faaa6c9b46dc9cb6c4f9"
+  },
+  "companion_sha256": {
+    "appeal-facts.json": "568f97485304cc5882e18c92038d2aa08e4ed828c18d74637c470a447b2eaf5f",
+    "appeal-texts.json": "690dba2965ea3fb3b2140c72543fe93d7011bd0fd77f7c281c18b87590399d47",
+    "generator.py": "f8371322cc817a5fc4b05ba0d42f5546e600226553606fa0fb00c72a60d963e2",
+    "self-check.json": "2bfe81ea6a4a09c6c279d030cfaa2d455f5e3be1ac2d3b4b045693de41c89a83"
+  },
+  "counts": {
+    "accounts": 1178,
+    "appeals": 70,
+    "appeals_by_kind": {
+      "dishonest": 11,
+      "honest": 55,
+      "manipulation": 4
+    },
+    "clusters": 200,
+    "clusters_by_label": {
+      "abusive": 35,
+      "ambiguous": 10,
+      "legitimate": 155
+    },
+    "entitlement_cycles": 7681,
+    "events": 171995,
+    "linkage_observations": 190923
+  },
+  "schema_version": "tier4-gpt-brief-v0.1",
+  "seed": 92746183,
+  "source_json_sha256": "8d62bb6e65b7123f79aed779046c6fa89f427783c5cf2274c94ba4f23a7c0c3b",
+  "validation": {
+    "appeal_leakage_scan": "passed",
+    "mechanical": "tier4-gpt-brief-v0.1",
+    "policy_label_review": "manual_required",
+    "semantic_leakage_review": "manual_required"
+  },
+  "world_end": "2026-06-01T00:00:00Z",
+  "world_tier": "tier4",
+  "world_version": "tier4-gpt-v2"
+}

@@ -1,0 +1,12 @@
+# P5-7 (docs/decisions.md): Jev appeals-on arm for the Tier 4 v2 comparison. Same
+# model, questions and thresholds as the raw arm, plus a separate typed check of the
+# appeal's claims against the timeline. Only read when passed explicitly (e.g.
+# `--provider-config` or REVIEWER_PROVIDER_CONFIG_PATH); the committed default config
+# is untouched. Live runs are paid: owner go-ahead first.
+active: typesafe
+
+typesafe:
+  model: jev-1.13.0
+  api_key_env: TYPESAFE_API_KEY
+  timeout_s: 30.0
+  state: appeals

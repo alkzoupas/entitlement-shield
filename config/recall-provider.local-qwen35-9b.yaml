@@ -1,0 +1,14 @@
+# P6 pilot: LLM second recall layer over detector-allowed units (docs/p6.0-recall-headroom.md).
+# Local MTPLX server, Qwen3.5 9B (the size Coinbase post-trained). Only read when passed
+# explicitly to scripts/p6_recall_pilot.py. Local and free.
+active: openai_compatible
+
+openai_compatible:
+  model: mtplx-qwen35-9b-optimized-speed
+  base_url: http://127.0.0.1:8000/v1
+  api_key_env: OPENAI_API_KEY  # unused by the local server
+  timeout_s: 600.0
+  # The answer is one line; thinking would spend the budget on hidden reasoning.
+  extra_body:
+    chat_template_kwargs:
+      enable_thinking: false

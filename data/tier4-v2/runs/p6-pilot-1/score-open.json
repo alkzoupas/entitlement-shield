@@ -1,0 +1,130 @@
+{
+  "allowed_abusive_clusters": 4,
+  "allowed_abusive_units": 60,
+  "allowed_legitimate_units": 408,
+  "auc_by_detector_band": {
+    "(0,0.4)": {
+      "abusive": 21,
+      "auc": 0.2852216748768473,
+      "legitimate": 145
+    },
+    "=0": {
+      "abusive": 19,
+      "auc": 0.48903508771929827,
+      "legitimate": 108
+    },
+    "[0.4,0.6)": {
+      "abusive": 20,
+      "auc": 0.3861290322580645,
+      "legitimate": 155
+    }
+  },
+  "auc_level_abusive_vs_legitimate": 0.3781045751633987,
+  "detector_unit_recall": 0.703,
+  "level_histogram": {
+    "abusive": {
+      "1": 9,
+      "2": 24,
+      "8": 7,
+      "9": 15,
+      "10": 5
+    },
+    "legitimate": {
+      "1": 47,
+      "2": 85,
+      "3": 1,
+      "8": 38,
+      "9": 182,
+      "10": 55
+    }
+  },
+  "reviewed": 492,
+  "scope": "open",
+  "splits": [
+    "train",
+    "tune"
+  ],
+  "threshold_sweep": [
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 60,
+      "added_legitimate_units": 408,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 1.0,
+      "flag_at_level_ge": 1
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 51,
+      "added_legitimate_units": 361,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.9554,
+      "flag_at_level_ge": 2
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 27,
+      "added_legitimate_units": 276,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.8366,
+      "flag_at_level_ge": 3
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 27,
+      "added_legitimate_units": 275,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.8366,
+      "flag_at_level_ge": 4
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 27,
+      "added_legitimate_units": 275,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.8366,
+      "flag_at_level_ge": 5
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 27,
+      "added_legitimate_units": 275,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.8366,
+      "flag_at_level_ge": 6
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 27,
+      "added_legitimate_units": 275,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.8366,
+      "flag_at_level_ge": 7
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 27,
+      "added_legitimate_units": 275,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.8366,
+      "flag_at_level_ge": 8
+    },
+    {
+      "added_abusive_clusters": 4,
+      "added_abusive_units": 20,
+      "added_legitimate_units": 237,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.802,
+      "flag_at_level_ge": 9
+    },
+    {
+      "added_abusive_clusters": 2,
+      "added_abusive_units": 5,
+      "added_legitimate_units": 55,
+      "clusters_with_no_detector_catch_now_caught": 1,
+      "combined_unit_recall": 0.7277,
+      "flag_at_level_ge": 10
+    }
+  ],
+  "valid": 492
+}
