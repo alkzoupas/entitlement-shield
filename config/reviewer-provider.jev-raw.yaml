@@ -1,0 +1,11 @@
+# P5-7 (docs/decisions.md): Jev appeals-off arm for the Tier 4 v2 comparison — the
+# P5-4 adapter unchanged (`state: raw`, the appeal never reaches Jev). Pinned here so
+# the arm does not drift with the demo config. Only read when passed explicitly
+# (`scripts/tier4_arms_run.py` defaults to it). Live runs are paid: owner go-ahead first.
+active: typesafe
+
+typesafe:
+  model: jev-1.13.0
+  api_key_env: TYPESAFE_API_KEY
+  timeout_s: 30.0
+  state: raw

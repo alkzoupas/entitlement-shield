@@ -1,0 +1,11 @@
+# P5.5 (docs/decisions.md P5-5): Jev on the code-side evidence summary — a separate
+# feature-engineering arm, not a like-for-like reviewer comparison. Only read when
+# passed explicitly (e.g. `scripts/arm4_run.py --provider-config` or
+# REVIEWER_PROVIDER_CONFIG_PATH); the committed default config is untouched.
+active: typesafe
+
+typesafe:
+  model: jev-1.13.0
+  api_key_env: TYPESAFE_API_KEY
+  timeout_s: 30.0
+  state: summary

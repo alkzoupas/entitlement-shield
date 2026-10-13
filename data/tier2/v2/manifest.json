@@ -1,0 +1,56 @@
+{
+  "schema_version": "tier2-brief-v1.0",
+  "world_version": "world-v2",
+  "world_tier": "tier2",
+  "parent_world_manifest_sha256": "8a5a6298e5fabee5037cab4041fb78456923c8dfac139b4f8e6d47594bb129ce",
+  "repair": {
+    "author": "OpenAI Codex, detector-aware mechanical maintenance",
+    "specification_commit": "4127e90",
+    "specification": "docs/decisions.md \u00a711",
+    "scope": "authoritative cycles and opaque IDs; accepted families and RNG unchanged",
+    "information_barrier": "maintenance derivative; original author-only barrier not intact",
+    "source_sha256": "de5527258ba75c605344ba1164b9fa6b43a606959c88bc81a44d2131b8cf1330"
+  },
+  "author_model": "anthropic/claude-sonnet \u2014 stand-in for qwen per docs/tier2-decisions.md; SAME model family as the detector designer, so the two-tier model-family coupling is NOT broken",
+  "seed": 20260902,
+  "world_end": "2026-06-30T00:00:00Z",
+  "accepted_families": [
+    "Household Shared Device",
+    "Sequential Household Users",
+    "Shared Public Kiosk / Library Terminal",
+    "Small Business Turnover",
+    "Account Recovery Migration",
+    "Roommate Turnover",
+    "Classroom / Course Cohort",
+    "Trial Credit Farm",
+    "Serial Reroll on Expiry",
+    "Credit Mule Ring",
+    "Device Reseller Fleet",
+    "Co-working Hot Desk",
+    "Boarding-School / Long-Distance Family",
+    "Referral / Viral Signup Burst",
+    "Verification-Avoidant Privacy Cluster",
+    "Slow-Burn Multi-Account Hoarder"
+  ],
+  "counts": {
+    "accounts": 1890,
+    "clusters": 308,
+    "events": 80855,
+    "linkage_observations": 3488,
+    "cycles": 13101,
+    "entitlement_cycles": 13101,
+    "clusters_by_label": {
+      "abusive": 38,
+      "ambiguous": 80,
+      "legitimate": 190
+    }
+  },
+  "checksums": {
+    "accounts.parquet": "f4088eb67cbb2be33686e21756d67db120035a08464e8a12eb62721324a49e81",
+    "account_events.parquet": "9990cdab86b8f0c51608437d7084bcae2394e7c0be8b091aedfa8e8423ab64b9",
+    "linkage_observations.parquet": "b8e7685a5412c0cd5521403c29df44c5fdc1079122ae02f3fa9fe03d106d9f34",
+    "ground_truth.parquet": "f55c749f44b8c5b610cb89fd2b49c7a06efbc8704f7e97fffafcfb10a50dd006",
+    "cluster_membership.parquet": "85b1a5e516e5a747e6cbef9770a5d9fe46352d8d6399189c155f31ef81552594",
+    "entitlement_cycles.parquet": "f37322e38a61ed9c77784bbd347f7e5f6d6374618550e7c738f62ff990636559"
+  }
+}

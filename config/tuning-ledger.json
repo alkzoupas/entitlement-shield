@@ -1,0 +1,375 @@
+{
+  "provenance": {
+    "generated_at": "2026-09-01T23:35:57.732251+00:00",
+    "git_rev": "d0e859a4182025dae3625d36b8973fb60156492c",
+    "note": "provenance is informational; --check compares only `results`."
+  },
+  "results": {
+    "candidates": [
+      {
+        "clean_no_fp": true,
+        "delta": {},
+        "l1_from_seed": 0.0,
+        "metrics": {
+          "fn": 10,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "tn": 172,
+          "tp": 10
+        },
+        "name": "seed"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-DEV-1": 0.35
+        },
+        "l1_from_seed": 0.05,
+        "metrics": {
+          "fn": 10,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "tn": 172,
+          "tp": 10
+        },
+        "name": "dev1=.35"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-DEV-1": 0.45
+        },
+        "l1_from_seed": 0.15,
+        "metrics": {
+          "fn": 6,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.7,
+          "tn": 172,
+          "tp": 14
+        },
+        "name": "dev1=.45"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-DEV-1": 0.55
+        },
+        "l1_from_seed": 0.25,
+        "metrics": {
+          "fn": 6,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.7,
+          "tn": 172,
+          "tp": 14
+        },
+        "name": "dev1=.55"
+      },
+      {
+        "clean_no_fp": false,
+        "delta": {
+          "F-DEV-1": 0.6
+        },
+        "l1_from_seed": 0.3,
+        "metrics": {
+          "fn": 6,
+          "fp": 10,
+          "fpr": 0.0581,
+          "precision": 0.5833,
+          "recall": 0.7,
+          "tn": 162,
+          "tp": 14
+        },
+        "name": "dev1=.60"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-CON-1": 0.25
+        },
+        "l1_from_seed": 0.1,
+        "metrics": {
+          "fn": 8,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "tn": 172,
+          "tp": 12
+        },
+        "name": "con1=.25"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-DOM-1": 0.25
+        },
+        "l1_from_seed": 0.1,
+        "metrics": {
+          "fn": 8,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "tn": 172,
+          "tp": 12
+        },
+        "name": "dom1=.25"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-VER-1": 0.25
+        },
+        "l1_from_seed": 0.1,
+        "metrics": {
+          "fn": 8,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "tn": 172,
+          "tp": 12
+        },
+        "name": "ver1=.25"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-CON-1": 0.25,
+          "F-DEV-1": 0.45,
+          "F-DOM-1": 0.25
+        },
+        "l1_from_seed": 0.35,
+        "metrics": {
+          "fn": 0,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tn": 172,
+          "tp": 20
+        },
+        "name": "dev1=.45,con1=.25,dom1=.25"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-CON-1": 0.25,
+          "F-CYC-1": 0.4,
+          "F-DEV-1": 0.5,
+          "F-DOM-1": 0.25
+        },
+        "l1_from_seed": 0.5,
+        "metrics": {
+          "fn": 0,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tn": 172,
+          "tp": 20
+        },
+        "name": "dev1=.50,con1=.25,dom1=.25,cyc1=.40"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-AGE-1": -0.18,
+          "F-CON-1": 0.18,
+          "F-CYC-1": 0.36,
+          "F-CYC-2": 0.18,
+          "F-CYC-3": 0.12,
+          "F-CYC-4": 0.12,
+          "F-DEV-1": 0.36,
+          "F-DEV-2": 0.18,
+          "F-DOM-1": 0.18,
+          "F-DOM-2": -0.18,
+          "F-PAY-1": 0.24,
+          "F-VER-1": 0.18
+        },
+        "l1_from_seed": 0.41,
+        "metrics": {
+          "fn": 8,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "tn": 172,
+          "tp": 12
+        },
+        "name": "scale1.2"
+      },
+      {
+        "clean_no_fp": true,
+        "delta": {
+          "F-AGE-1": -0.1999,
+          "F-CON-1": 0.1999,
+          "F-CYC-1": 0.3999,
+          "F-CYC-2": 0.1999,
+          "F-CYC-3": 0.1333,
+          "F-CYC-4": 0.1333,
+          "F-DEV-1": 0.3999,
+          "F-DEV-2": 0.1999,
+          "F-DOM-1": 0.1999,
+          "F-DOM-2": -0.1999,
+          "F-PAY-1": 0.2666,
+          "F-VER-1": 0.1999
+        },
+        "l1_from_seed": 0.6823,
+        "metrics": {
+          "fn": 8,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "tn": 172,
+          "tp": 12
+        },
+        "name": "scale1.33"
+      }
+    ],
+    "chosen": {
+      "delta_from_seed": {
+        "F-CON-1": 0.25,
+        "F-DEV-1": 0.45,
+        "F-DOM-1": 0.25
+      },
+      "l1_from_seed": 0.35,
+      "name": "dev1=.45,con1=.25,dom1=.25",
+      "tune_metrics": {
+        "fn": 0,
+        "fp": 0,
+        "fpr": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 172,
+        "tp": 20
+      },
+      "vector": {
+        "F-AGE-1": -0.15,
+        "F-CON-1": 0.25,
+        "F-CYC-1": 0.3,
+        "F-CYC-2": 0.15,
+        "F-CYC-3": 0.1,
+        "F-CYC-4": 0.1,
+        "F-DEV-1": 0.45,
+        "F-DEV-2": 0.15,
+        "F-DOM-1": 0.25,
+        "F-DOM-2": -0.15,
+        "F-PAY-1": 0.2,
+        "F-VER-1": 0.15
+      }
+    },
+    "chosen_equals_frozen_weights": true,
+    "objective": "max recall subject to FPR == 0 (precision == 1) on the tune split; tie-break: minimal L1 distance from the seed vector",
+    "original_seed_vector": {
+      "F-AGE-1": -0.15,
+      "F-CON-1": 0.15,
+      "F-CYC-1": 0.3,
+      "F-CYC-2": 0.15,
+      "F-CYC-3": 0.1,
+      "F-CYC-4": 0.1,
+      "F-DEV-1": 0.3,
+      "F-DEV-2": 0.15,
+      "F-DOM-1": 0.15,
+      "F-DOM-2": -0.15,
+      "F-PAY-1": 0.2,
+      "F-VER-1": 0.15
+    },
+    "preset": "dev",
+    "rejected": [
+      {
+        "name": "dev1=.60",
+        "reason": "injects false positives (fpr>0)"
+      }
+    ],
+    "resulting_feature_manifest_hash": "fe21a7b052bea913fcbb880037a85c022d0e2be9d855a426bd449f60172a2021",
+    "score_threshold": 0.6,
+    "seeds": {
+      "note": "validation seeds are the SAME generator with different seeds (not statistically independent worlds); reserved from selection.",
+      "tune": 1,
+      "validation": [
+        2,
+        3,
+        7
+      ]
+    },
+    "split_sizes_tune_world": {
+      "test": 141,
+      "train": 512,
+      "tune": 202
+    },
+    "two_family_gate": true,
+    "validation_seed_metrics": {
+      "2": {
+        "chosen_vector_metrics": {
+          "fn": 0,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tn": 176,
+          "tp": 20
+        },
+        "original_seed_metrics": {
+          "fn": 10,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "tn": 176,
+          "tp": 10
+        }
+      },
+      "3": {
+        "chosen_vector_metrics": {
+          "fn": 0,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tn": 166,
+          "tp": 22
+        },
+        "original_seed_metrics": {
+          "fn": 10,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.5455,
+          "tn": 166,
+          "tp": 12
+        }
+      },
+      "7": {
+        "chosen_vector_metrics": {
+          "fn": 0,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tn": 180,
+          "tp": 23
+        },
+        "original_seed_metrics": {
+          "fn": 11,
+          "fp": 0,
+          "fpr": 0.0,
+          "precision": 1.0,
+          "recall": 0.5217,
+          "tn": 180,
+          "tp": 12
+        }
+      }
+    },
+    "world_checksum_sha256": "5067f55a7690d9d0763da8a6a3715ac72edcd70c46bb4aa855ccda3dada816b7"
+  }
+}

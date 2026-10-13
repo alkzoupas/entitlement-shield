@@ -1,0 +1,77 @@
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local env + generated synthetic data (worlds are regenerable from a seed).
+.env
+/data/synthetic/*.db
+/data/synthetic/*.parquet
+/data/synthetic/manifest.json
+/data/synthetic/eval-report.json
+# Phase 5 Track 2: scripts/demo_pick.py --out, consumed by scripts/demo_review.py
+# within `make demo` — regenerable from the dev_arm4 world, never an audit anchor.
+/data/synthetic/demo-picks.json
+# `make demo` isolated world (stores, eval report, picks, seed artifacts) under
+# data/synthetic/demo/ — regenerable, never an audit anchor.
+/data/synthetic/demo/
+# P3.9: the arm-4 report and the per-arm dev worlds `scripts/arm4_run.py` seeds.
+# Dev tier (W-1) and regenerable from a seed by `make arm4`, exactly like the
+# eval report above — never an audit anchor, so never committed.
+/data/synthetic/arm4-report.json
+/data/synthetic/arm4/
+# P4.8–P4.10 arm-4 analysis artifacts (transcripts, per-run worlds, subagent
+# reports/worlds, ablation outputs) — all dev-tier (W-1) and regenerable; evidence
+# for the findings docs, never an audit anchor, so never committed.
+/data/synthetic/arm4-*
+
+# Tier 2 evaluation world: the parquets + manifest ARE committed (the two-tier
+# control's audit anchor — small, and downstream results depend on the exact
+# bytes). Only the derived inference/GT stores (rebuilt by scripts/load_tier2.py)
+# are regenerable and ignored.
+/data/tier2/*.db
+
+# Tier 3 (GPT-authored probe world): source JSON, parquets, manifest and the
+# open-tune eval JSONs ARE committed (preservation boundary, docs/tier3-decisions.md);
+# the rejected first submission is kept as evidence. Loaded stores and
+# publication generations are derived (scripts/republish_tier3.py) and ignored.
+/data/tier3/*.db
+/data/tier3/.loads/
+/data/tier3/stores-current
+# Tier 4: the 98 MB raw GPT JSON is pinned by source_json_sha256 in the manifest,
+# not committed; the owner's raw drop directory is local only.
+/data/tier4/gpt-world.json
+/data/tier4/*.db
+/data/tier4/.loads/
+/data/tier4/stores-current
+/data/synthetic2/
+/data/synthetic3/
+/data/tier4-v2/gpt-world.json
+/data/tier4-v2/appeal-facts.json
+/data/tier4-v2/*.db
+/data/tier4-v2/.loads/
+/data/tier4-v2/stores-current
+/data/tier4-v2/runs/*/*/*.db
+/data/tier4-v2/runs/*/*/*.db-journal
+
+# Run logs (scripts/arm4_run.py --log-file default): regenerable, never an
+# audit anchor, so never committed.
+/logs/
+
+# OS
+.DS_Store
+# Versioned Tier 2 ingestion generations are derived, not source artifacts.
+/data/tier2/**/.loads/
+/data/tier2/**/stores-current
+/data/tier2/**/*.db
+
+# Copies of third-party articles (Coinbase "Owning Intelligence" series): reference only,
+# copyrighted, never committed. Link to the originals instead.
+/docs/coinbase/

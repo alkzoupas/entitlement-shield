@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReviewerVerdict",
+  "description": "L-2's model-facing output contract (docs/decisions.md, Phase 3 plan P3.3). Field order is contractual (R-4). The model emits exactly these fields; uphold/reverse/escalate is derived in code and never appears here (R-3).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_supporting_action",
+    "benign_explanations",
+    "missing_evidence",
+    "unverified_claims",
+    "rationale",
+    "recommended_action",
+    "confidence",
+    "escalate_to_human"
+  ],
+  "properties": {
+    "evidence_supporting_action": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Citations, each formatted \"{kind}:{key}\" against the case's evidence_keys allowlist (C-2). Entries that do not resolve are moved to unverified_claims by services/reviewer_validation.py, never trusted as-is."
+    },
+    "benign_explanations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unverified_claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "recommended_action": {
+      "type": "string",
+      "enum": ["allow", "light_friction", "hold_incremental_credits", "temporary_hold"]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "escalate_to_human": {
+      "type": "boolean"
+    }
+  }
+}

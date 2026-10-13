@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Case {{ decision.decision_id[:12] }} — EntitlementShield{% endblock %}
+{% block content %}
+<p><a href="/cases">← queue</a></p>
+<h1>Case <span class="mono">{{ decision.decision_id[:16] }}…</span></h1>
+
+{% if error %}<div class="err">Action rejected: {{ error }}</div>{% endif %}
+
+<div class="panel">
+  <h2>Decision</h2>
+  <dl class="kv">
+    <dt>Status</dt><dd><span class="pill s-{{ decision.status }}">{{ decision.status }}</span></dd>
+    <dt>Risk score</dt><dd>{{ "%.4f"|format(decision.risk_score) }}</dd>
+    <dt>Proposed action</dt><dd>{{ decision.proposed_action }}</dd>
+    <dt>Account</dt><dd class="mono">{{ decision.account_id }}</dd>
+    <dt>Snapshot</dt><dd class="mono">{{ decision.cluster_snapshot_id or "—" }}</dd>
+    <dt>Detector / policy</dt><dd class="mono">{{ decision.detector_version }} / {{ decision.policy_version }}</dd>
+    <dt>Run</dt><dd class="mono">{{ decision.run_id }}</dd>
+    <dt>Created</dt><dd class="muted">{{ decision.created_at }}</dd>
+  </dl>
+</div>
+
+<div class="panel">
+  <h2>Original detection evidence</h2>
+  {% if evidence %}
+  <dl class="kv">
+    <dt>As of</dt><dd>{{ evidence.as_of }}</dd>
+    <dt>Cycle window</dt><dd>{{ evidence.window_start }} → {{ evidence.window_end }}</dd>
+    <dt>Allowance / excess</dt><dd>{{ evidence.allowance }} credits / {{ "%.2f"|format(evidence.excess) }}</dd>
+    <dt>Policy caps</dt><dd>{{ evidence.cap_reasons|join(", ") or "None" }}</dd>
+    <dt>Manifest</dt><dd class="mono">{{ evidence.feature_manifest_hash }}</dd>
+    <dt>Evidence hash</dt><dd class="mono">{{ evidence.evidence_id }}</dd>
+  </dl>
+  <table>
+    <thead><tr><th>Feature</th><th>Raw value</th><th>Contribution</th><th>Fired</th></tr></thead>
+    <tbody>{% for f in evidence.contributions %}
+      <tr><td>{{ f.feature_id }}</td><td>{{ f.raw_value }}</td><td>{{ f.contribution }}</td><td>{{ f.fired }}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+  <details><summary>Original linkage evidence</summary>
+    <table><thead><tr><th>Account A</th><th>Account B</th><th>Evidence count</th></tr></thead>
+      <tbody>{% for edge in evidence.edges %}<tr><td>{{ edge[0] }}</td><td>{{ edge[1] }}</td><td>{{ edge[2] }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </details>
+  <details><summary>Original cycle timeline (at or before the decision cutoff)</summary>
+    <table><thead><tr><th>When</th><th>Account</th><th>Event</th><th>Credits</th></tr></thead>
+      <tbody>{% for e in evidence.timeline %}<tr><td>{{ e.timestamp }}</td><td>{{ e.account_id }}</td><td>{{ e.event_type }}</td><td>{{ e.credits_amount if e.credits_amount is not none else "—" }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </details>
+  {% elif evidence_error %}
+  <p class="err">Evidence is corrupted: the stored evidence reference is broken — this case's original assessment cannot be displayed and evidence-dependent reversal is unavailable.</p>
+  {% else %}
+  <p class="err">Original evidence was not retained for this legacy case. Evidence-dependent reversal is unavailable; later activity cannot reconstruct the original assessment.</p>
+  {% endif %}
+</div>
+
+{% include "_reviewer_panel.html" %}
+
+<div class="panel">
+  <h2>Analyst action</h2>
+  {% if legal_actions %}
+  <form method="post" action="/cases/{{ decision.decision_id }}/human-decision"
+        style="display:flex; gap:.6rem; align-items:end; flex-wrap:wrap">
+    <div>
+      <label for="act">Action</label>
+      <select id="act" name="action">
+        {% for a in legal_actions %}<option value="{{ a }}">{{ a }}</option>{% endfor %}
+      </select>
+    </div>
+    <div style="flex:1; min-width:14rem">
+      <label for="reason">Reason</label>
+      <input id="reason" name="reason" type="text" placeholder="optional note" style="width:100%">
+    </div>
+    <button type="submit">Apply</button>
+  </form>
+  {% else %}
+  <p class="muted">No available analyst action ({{ decision.status }}).</p>
+  {% endif %}
+</div>
+
+{% if account %}
+<div class="panel">
+  <h2>Account</h2>
+  <dl class="kv">
+    <dt>Domain type</dt><dd>{{ account.email_domain_type }}</dd>
+    <dt>Verification</dt><dd>{{ account.verification_level }}</dd>
+    <dt>Created</dt><dd class="muted">{{ account.created_at }}</dd>
+  </dl>
+</div>
+{% endif %}
+
+{% if snapshot %}
+<div class="panel">
+  <h2>Cluster snapshot <span class="muted mono">({{ snapshot.member_account_ids|length }} members,
+    {{ snapshot.edges|length }} edges)</span></h2>
+  <p class="muted">Evidence: {{ snapshot.evidence_summary }}</p>
+  <table>
+    <thead><tr><th>Member</th></tr></thead>
+    <tbody>
+      {% for m in snapshot.member_account_ids %}<tr><td class="mono">{{ m }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% if cycles %}
+<div class="panel">
+  <h2>Current entitlement records (may include later activity)</h2>
+  <table>
+    <thead><tr><th>Cycle</th><th>Start</th><th>End</th><th>Granted</th><th>Consumed</th><th>Expired</th></tr></thead>
+    <tbody>
+      {% for c in cycles %}
+      <tr>
+        <td class="mono">{{ c.cycle_id }}</td><td class="muted">{{ c.cycle_start }}</td>
+        <td class="muted">{{ c.cycle_end }}</td>
+        <td>{{ c.credits_granted }}</td><td>{{ c.credits_consumed }}</td><td>{{ c.credits_expired }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<div class="panel">
+  <h2>Human reviews</h2>
+  {% if reviews %}
+  <table>
+    <thead><tr><th>When</th><th>Action</th><th>Outcome</th><th>Reason</th></tr></thead>
+    <tbody>
+      {% for r in reviews %}
+      <tr><td class="muted">{{ r.created_at }}</td><td>{{ r.reviewer_action }}</td>
+          <td>{{ r.final_outcome }}</td><td>{{ r.reviewer_reason or "—" }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p class="muted">No analyst decisions yet.</p>{% endif %}
+</div>
+
+<div class="panel">
+  <h2>Audit trail</h2>
+  {% if trail %}
+  <table>
+    <thead><tr><th>When</th><th>Event</th><th>Actor</th><th>Payload</th></tr></thead>
+    <tbody>
+      {% for e in trail %}
+      <tr><td class="muted">{{ e.timestamp }}</td><td class="mono">{{ e.event_name }}</td>
+          <td>{{ e.actor_type }}</td><td class="mono muted">{{ e.payload }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p class="muted">No audit events.</p>{% endif %}
+</div>
+{% endblock %}

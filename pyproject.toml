@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "entitlement-shield"
+version = "0.1.0"
+description = "Evidence-aware Trust & Safety system for detecting multi-account free-tier abuse (synthetic data only)."
+readme = "docs/original-plan.md"
+# Architecture floor is Python 3.12 (docs/architecture.md §5); the repo runs on
+# whatever >=3.12 interpreter is present (3.14 locally). Kept as a floor, not a pin.
+requires-python = ">=3.12"
+dependencies = [
+  "sqlalchemy>=2.0",
+  "pydantic>=2.7",
+  "networkx>=3.3",
+  "polars>=1.0",
+  "pyyaml>=6.0",
+  "fastapi>=0.110",
+  "jinja2>=3.1",
+  "python-multipart>=0.0.9",
+  "uvicorn>=0.29",
+  "anthropic>=1.0",
+  "openai>=1.0",
+  "httpx>=0.27",  # P5.4 TypeSafe Jev adapter (plain HTTP, no vendor SDK)
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.5",
+  "mypy>=1.10",
+  "httpx>=0.27",
+  "types-PyYAML>=6.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "backend"}
+
+[tool.setuptools.packages.find]
+where = ["backend"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/app/tests"]
+pythonpath = ["backend"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["backend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# FastAPI's dependency injection is expressed as call-defaults (Depends/Query/Form);
+# B008 (no function calls in argument defaults) is a false positive for that idiom.
+"backend/app/api/*" = ["B008"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "backend"
+packages = ["app"]
+exclude = ["app/tests/"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+
+# networkx ships no type stubs; the clustering service uses it directly.
+[[tool.mypy.overrides]]
+module = ["networkx.*"]
+ignore_missing_imports = true

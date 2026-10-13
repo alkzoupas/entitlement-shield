@@ -1,0 +1,793 @@
+{
+  "appeals": {
+    "appeals": 70,
+    "bigram_naive_bayes": {
+      "kind_honest_vs_dishonest": {
+        "empirical_prior": {
+          "accuracy": 0.758,
+          "balanced_accuracy": 0.491
+        },
+        "most_indicative_bigrams": [
+          {
+            "bigram": "account has",
+            "docs_neg": 1,
+            "docs_pos": 3,
+            "log_doc_ratio_positive": 2.17
+          },
+          {
+            "bigram": "accounts are",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "shared setup",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "since then",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "the dates",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "what triggered",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "arrived on",
+            "docs_neg": 3,
+            "docs_pos": 5,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "credits arrived",
+            "docs_neg": 3,
+            "docs_pos": 5,
+            "log_doc_ratio_positive": 1.88
+          },
+          {
+            "bigram": "is shared",
+            "docs_neg": 2,
+            "docs_pos": 3,
+            "log_doc_ratio_positive": 1.77
+          },
+          {
+            "bigram": "review of",
+            "docs_neg": 2,
+            "docs_pos": 3,
+            "log_doc_ratio_positive": 1.77
+          }
+        ],
+        "n_negative": 55,
+        "n_positive": 11,
+        "passes_bar": true,
+        "uniform_prior": {
+          "accuracy": 0.758,
+          "balanced_accuracy": 0.564,
+          "permutation_null_p95": 0.573,
+          "permutation_p_value": 0.07
+        },
+        "unigram_uniform_prior_balanced_accuracy": 0.6
+      },
+      "label_abusive_vs_legitimate": {
+        "empirical_prior": {
+          "accuracy": 0.727,
+          "balanced_accuracy": 0.477
+        },
+        "most_indicative_bigrams": [
+          {
+            "bigram": "account has",
+            "docs_neg": 1,
+            "docs_pos": 3,
+            "log_doc_ratio_positive": 2.08
+          },
+          {
+            "bigram": "arrived on",
+            "docs_neg": 3,
+            "docs_pos": 5,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "credits arrived",
+            "docs_neg": 3,
+            "docs_pos": 5,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "accounts are",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "like to",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "since then",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "sorry if",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "the dates",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "the shared",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          },
+          {
+            "bigram": "what triggered",
+            "docs_neg": 1,
+            "docs_pos": 2,
+            "log_doc_ratio_positive": 1.79
+          }
+        ],
+        "n_negative": 54,
+        "n_positive": 12,
+        "passes_bar": true,
+        "uniform_prior": {
+          "accuracy": 0.742,
+          "balanced_accuracy": 0.583,
+          "permutation_null_p95": 0.593,
+          "permutation_p_value": 0.065
+        },
+        "unigram_uniform_prior_balanced_accuracy": 0.597
+      }
+    },
+    "distinct_sentences": 219,
+    "distinct_texts": 70,
+    "kind_by_label": {
+      "abusive/dishonest": 11,
+      "abusive/manipulation": 1,
+      "ambiguous/honest": 3,
+      "ambiguous/manipulation": 1,
+      "legitimate/honest": 52,
+      "legitimate/manipulation": 2
+    },
+    "length_auc_abusive_high": 0.577,
+    "length_auc_dishonest_high": 0.623,
+    "sentence_lookup": {
+      "normalised_kind_3class": {
+        "accuracy_with_majority_fallback": 0.786,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.786,
+        "n": 70
+      },
+      "normalised_kind_honest_vs_dishonest": {
+        "accuracy_with_majority_fallback": 0.833,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.833,
+        "n": 66
+      },
+      "normalised_label_3class": {
+        "accuracy_with_majority_fallback": 0.771,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.771,
+        "n": 70
+      },
+      "normalised_label_abusive_vs_legitimate": {
+        "accuracy_with_majority_fallback": 0.818,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.818,
+        "n": 66
+      },
+      "raw_kind_3class": {
+        "accuracy_with_majority_fallback": 0.786,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.786,
+        "n": 70
+      },
+      "raw_kind_honest_vs_dishonest": {
+        "accuracy_with_majority_fallback": 0.833,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.833,
+        "n": 66
+      },
+      "raw_label_3class": {
+        "accuracy_with_majority_fallback": 0.771,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.771,
+        "n": 70
+      },
+      "raw_label_abusive_vs_legitimate": {
+        "accuracy_with_majority_fallback": 0.818,
+        "correct_on_covered": 0,
+        "covered": 0,
+        "majority_class_accuracy": 0.818,
+        "n": 66
+      }
+    },
+    "single_sentence_giveaways": [],
+    "text_pass": {
+      "bigram_kind_balanced_accuracy_le_0_65": true,
+      "sentence_lookup_kind_not_above_majority": true
+    }
+  },
+  "duplicates": {
+    "clusters": 200,
+    "distinct_fingerprints": 200,
+    "duplicated_fingerprints": 0
+  },
+  "order_coupling": {
+    "accounts.id_order_auc": 0.481,
+    "accounts.row_order_auc": 0.48,
+    "cluster_membership.id_order_auc": 0.481,
+    "cluster_membership.row_order_auc": 0.519,
+    "entitlement_cycles.id_order_auc": 0.501,
+    "entitlement_cycles.row_order_auc": 0.5,
+    "ground_truth.id_order_auc": 0.463,
+    "ground_truth.row_order_auc": 0.48
+  },
+  "separability": {
+    "n_abusive": 35,
+    "n_legitimate": 155,
+    "perfect_single_separators": [],
+    "single_signal": {
+      "activity_hour_entropy": {
+        "abusive_range": [
+          0.72,
+          2.412
+        ],
+        "auc_abusive_high": 0.472,
+        "best_threshold_balanced_accuracy": 0.571,
+        "legitimate_range": [
+          0.599,
+          2.807
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 2.4179
+      },
+      "appeal_length": {
+        "abusive_range": [
+          0.0,
+          357.0
+        ],
+        "auc_abusive_high": 0.506,
+        "best_threshold_balanced_accuracy": 0.537,
+        "legitimate_range": [
+          0.0,
+          420.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 222.5
+      },
+      "appeal_present": {
+        "abusive_range": [
+          0.0,
+          1.0
+        ],
+        "auc_abusive_high": 0.497,
+        "best_threshold_balanced_accuracy": 0.503,
+        "legitimate_range": [
+          0.0,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.5
+      },
+      "claimed_per_account_cycle": {
+        "abusive_range": [
+          25.0,
+          25.0
+        ],
+        "auc_abusive_high": 0.5,
+        "best_threshold_balanced_accuracy": 0.5,
+        "legitimate_range": [
+          25.0,
+          25.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": null
+      },
+      "cluster_size": {
+        "abusive_range": [
+          4,
+          8
+        ],
+        "auc_abusive_high": 0.649,
+        "best_threshold_balanced_accuracy": 0.621,
+        "legitimate_range": [
+          4,
+          8
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 5.5
+      },
+      "concurrent_hour_frac": {
+        "abusive_range": [
+          0.0,
+          0.678
+        ],
+        "auc_abusive_high": 0.693,
+        "best_threshold_balanced_accuracy": 0.669,
+        "legitimate_range": [
+          0.0,
+          0.657
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.2699
+      },
+      "consumed_over_granted": {
+        "abusive_range": [
+          0.506,
+          0.83
+        ],
+        "auc_abusive_high": 0.674,
+        "best_threshold_balanced_accuracy": 0.657,
+        "legitimate_range": [
+          0.518,
+          0.804
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.6798
+      },
+      "consumed_per_account_cycle": {
+        "abusive_range": [
+          12.655,
+          20.743
+        ],
+        "auc_abusive_high": 0.674,
+        "best_threshold_balanced_accuracy": 0.657,
+        "legitimate_range": [
+          12.957,
+          20.107
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 16.994
+      },
+      "frac_email_domain_type_consumer": {
+        "abusive_range": [
+          0.0,
+          1.0
+        ],
+        "auc_abusive_high": 0.589,
+        "best_threshold_balanced_accuracy": 0.605,
+        "legitimate_range": [
+          0.0,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.5357
+      },
+      "frac_email_domain_type_disposable": {
+        "abusive_range": [
+          0.0,
+          0.6
+        ],
+        "auc_abusive_high": 0.448,
+        "best_threshold_balanced_accuracy": 0.579,
+        "legitimate_range": [
+          0.0,
+          0.8
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.1339
+      },
+      "frac_email_domain_type_education": {
+        "abusive_range": [
+          0.0,
+          0.571
+        ],
+        "auc_abusive_high": 0.465,
+        "best_threshold_balanced_accuracy": 0.564,
+        "legitimate_range": [
+          0.0,
+          0.833
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.1833
+      },
+      "frac_email_domain_type_enterprise": {
+        "abusive_range": [
+          0.0,
+          0.429
+        ],
+        "auc_abusive_high": 0.483,
+        "best_threshold_balanced_accuracy": 0.55,
+        "legitimate_range": [
+          0.0,
+          0.75
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.3875
+      },
+      "frac_verification_level_email": {
+        "abusive_range": [
+          0.0,
+          0.75
+        ],
+        "auc_abusive_high": 0.489,
+        "best_threshold_balanced_accuracy": 0.541,
+        "legitimate_range": [
+          0.0,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.1339
+      },
+      "frac_verification_level_enhanced": {
+        "abusive_range": [
+          0.0,
+          0.4
+        ],
+        "auc_abusive_high": 0.471,
+        "best_threshold_balanced_accuracy": 0.551,
+        "legitimate_range": [
+          0.0,
+          0.5
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.1833
+      },
+      "frac_verification_level_none": {
+        "abusive_range": [
+          0.0,
+          0.5
+        ],
+        "auc_abusive_high": 0.481,
+        "best_threshold_balanced_accuracy": 0.553,
+        "legitimate_range": [
+          0.0,
+          0.833
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.4643
+      },
+      "frac_verification_level_phone": {
+        "abusive_range": [
+          0.0,
+          0.833
+        ],
+        "auc_abusive_high": 0.556,
+        "best_threshold_balanced_accuracy": 0.581,
+        "legitimate_range": [
+          0.0,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.4143
+      },
+      "high_tier_consume_frac": {
+        "abusive_range": [
+          1.0,
+          1.0
+        ],
+        "auc_abusive_high": 0.5,
+        "best_threshold_balanced_accuracy": 0.5,
+        "legitimate_range": [
+          1.0,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": null
+      },
+      "login_per_account": {
+        "abusive_range": [
+          57.0,
+          101.833
+        ],
+        "auc_abusive_high": 0.502,
+        "best_threshold_balanced_accuracy": 0.602,
+        "legitimate_range": [
+          42.75,
+          99.8
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 65.6786
+      },
+      "median_account_age_days": {
+        "abusive_range": [
+          159.03,
+          629.0
+        ],
+        "auc_abusive_high": 0.626,
+        "best_threshold_balanced_accuracy": 0.635,
+        "legitimate_range": [
+          135.664,
+          738.5
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 330.75
+      },
+      "median_hours_create_to_first_claim": {
+        "abusive_range": [
+          135.508,
+          11025.25
+        ],
+        "auc_abusive_high": 0.634,
+        "best_threshold_balanced_accuracy": 0.624,
+        "legitimate_range": [
+          12.217,
+          13374.325
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 6102.0667
+      },
+      "shared_behavioral_template_values": {
+        "abusive_range": [
+          1,
+          3
+        ],
+        "auc_abusive_high": 0.596,
+        "best_threshold_balanced_accuracy": 0.567,
+        "legitimate_range": [
+          1,
+          3
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 1.5
+      },
+      "shared_network_group_values": {
+        "abusive_range": [
+          1,
+          3
+        ],
+        "auc_abusive_high": 0.535,
+        "best_threshold_balanced_accuracy": 0.588,
+        "legitimate_range": [
+          1,
+          3
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 2.5
+      },
+      "shared_payment_token_values": {
+        "abusive_range": [
+          0,
+          3
+        ],
+        "auc_abusive_high": 0.488,
+        "best_threshold_balanced_accuracy": 0.547,
+        "legitimate_range": [
+          0,
+          3
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 1.5
+      },
+      "shared_recovery_contact_values": {
+        "abusive_range": [
+          0,
+          3
+        ],
+        "auc_abusive_high": 0.531,
+        "best_threshold_balanced_accuracy": 0.525,
+        "legitimate_range": [
+          0,
+          3
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 1.5
+      },
+      "shared_stable_device_values": {
+        "abusive_range": [
+          0,
+          3
+        ],
+        "auc_abusive_high": 0.549,
+        "best_threshold_balanced_accuracy": 0.559,
+        "legitimate_range": [
+          0,
+          3
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 1.5
+      },
+      "signup_spread_days": {
+        "abusive_range": [
+          6.866,
+          634.18
+        ],
+        "auc_abusive_high": 0.587,
+        "best_threshold_balanced_accuracy": 0.586,
+        "legitimate_range": [
+          19.633,
+          659.324
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 489.7063
+      },
+      "top_share_behavioral_template": {
+        "abusive_range": [
+          0.333,
+          1.0
+        ],
+        "auc_abusive_high": 0.441,
+        "best_threshold_balanced_accuracy": 0.574,
+        "legitimate_range": [
+          0.333,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.3875
+      },
+      "top_share_network_group": {
+        "abusive_range": [
+          0.333,
+          1.0
+        ],
+        "auc_abusive_high": 0.486,
+        "best_threshold_balanced_accuracy": 0.598,
+        "legitimate_range": [
+          0.333,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.3875
+      },
+      "top_share_payment_token": {
+        "abusive_range": [
+          0.125,
+          1.0
+        ],
+        "auc_abusive_high": 0.551,
+        "best_threshold_balanced_accuracy": 0.594,
+        "legitimate_range": [
+          0.125,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.8333
+      },
+      "top_share_recovery_contact": {
+        "abusive_range": [
+          0.125,
+          1.0
+        ],
+        "auc_abusive_high": 0.517,
+        "best_threshold_balanced_accuracy": 0.54,
+        "legitimate_range": [
+          0.125,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.5357
+      },
+      "top_share_stable_device": {
+        "abusive_range": [
+          0.125,
+          1.0
+        ],
+        "auc_abusive_high": 0.575,
+        "best_threshold_balanced_accuracy": 0.602,
+        "legitimate_range": [
+          0.125,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.8571
+      },
+      "verification_failed_per_account": {
+        "abusive_range": [
+          1.2,
+          13.5
+        ],
+        "auc_abusive_high": 0.357,
+        "best_threshold_balanced_accuracy": 0.663,
+        "legitimate_range": [
+          0.6,
+          14.25
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 6.0833
+      },
+      "verification_per_account": {
+        "abusive_range": [
+          0.5,
+          1.0
+        ],
+        "auc_abusive_high": 0.519,
+        "best_threshold_balanced_accuracy": 0.553,
+        "legitimate_range": [
+          0.167,
+          1.0
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": ">",
+        "threshold": 0.5357
+      },
+      "weekend_activity_frac": {
+        "abusive_range": [
+          0.09,
+          0.328
+        ],
+        "auc_abusive_high": 0.488,
+        "best_threshold_balanced_accuracy": 0.61,
+        "legitimate_range": [
+          0.1,
+          0.445
+        ],
+        "perfect_separation": false,
+        "side_for_abusive": "<",
+        "threshold": 0.1393
+      }
+    },
+    "top_two_signal_rules": [
+      {
+        "balanced_accuracy": 0.736,
+        "rule": "verification_failed_per_account < 6.083 AND cluster_size > 4.5"
+      },
+      {
+        "balanced_accuracy": 0.72,
+        "rule": "concurrent_hour_frac > 0.2192 AND median_account_age_days > 158.5"
+      },
+      {
+        "balanced_accuracy": 0.713,
+        "rule": "concurrent_hour_frac > 0.2192 AND median_hours_create_to_first_claim > 134"
+      },
+      {
+        "balanced_accuracy": 0.705,
+        "rule": "concurrent_hour_frac > 0.2458 AND verification_failed_per_account < 7.271"
+      },
+      {
+        "balanced_accuracy": 0.702,
+        "rule": "concurrent_hour_frac > 0.2458 AND cluster_size > 4.5"
+      }
+    ]
+  },
+  "world": "tier4-gpt-v2"
+}

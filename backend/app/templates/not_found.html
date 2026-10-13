@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Not found — EntitlementShield{% endblock %}
+{% block content %}
+<h1>Case not found</h1>
+<p class="muted">No decision with id <code>{{ decision_id }}</code>.</p>
+<p><a href="/cases">← back to the queue</a></p>
+{% endblock %}

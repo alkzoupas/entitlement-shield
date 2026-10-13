@@ -1,0 +1,58 @@
+<div class="panel">
+  <h2>Model reviewer</h2>
+
+  {% if reviewer_narrative %}
+  <div class="narrative">
+    <h3>Summary <span class="muted">(model output &mdash; decision support only, not an action)</span></h3>
+    <p>{{ reviewer_narrative.rationale }}</p>
+    {% if reviewer_narrative.benign_explanations %}
+    <p><strong>Possible benign explanations:</strong> {{ reviewer_narrative.benign_explanations|join("; ") }}</p>
+    {% endif %}
+    {% if reviewer_narrative.missing_evidence %}
+    <p><strong>Missing evidence:</strong> {{ reviewer_narrative.missing_evidence|join("; ") }}</p>
+    {% endif %}
+    {% if reviewer_narrative.unverified_claims %}
+    <p><strong>Unverified claims:</strong> {{ reviewer_narrative.unverified_claims|join("; ") }}</p>
+    {% endif %}
+    <p class="mono muted">source: {{ reviewer_narrative.provider }}/{{ reviewer_narrative.model_snapshot }}</p>
+  </div>
+  {% endif %}
+
+  {% if reviewer_samples %}
+  <p>
+    Overall effect:
+    <span class="pill">{{ reviewer_overall_effect or "—" }}</span>
+    {% if escalation %}
+    <span class="pill s-under_review">escalated ({{ escalation.source }}, expires {{ escalation.expires_at }})</span>
+    {% endif %}
+  </p>
+  <table>
+    <thead><tr><th>Sample</th><th>Verdict</th><th>Recommendation</th><th>Confidence</th><th>Citations</th></tr></thead>
+    <tbody>
+      {% for s in reviewer_samples %}
+      <tr>
+        <td>{{ s.sample_index }}</td>
+        <td>{{ s.derived_verdict or "—" }}</td>
+        <td>{{ s.recommendation or "—" }}</td>
+        <td>{{ "%.2f"|format(s.confidence) if s.confidence is not none else "—" }}</td>
+        <td class="mono">{{ s.citations|join(", ") or "—" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">No reviewer run recorded for this case yet.</p>
+  {% endif %}
+
+  {% if appeal %}
+  <details {{ "open" if reviewer_samples else "" }}>
+    <summary>Latest appeal ({{ appeal.source }}, {{ appeal.submitted_at }}{{ " — truncated" if appeal.truncated else "" }})</summary>
+    <p class="mono" style="white-space:pre-wrap">{{ appeal.text }}</p>
+  </details>
+  {% endif %}
+
+  <form method="post" action="/cases/{{ decision.decision_id }}/reviewer/run"
+        style="display:flex; gap:.6rem; align-items:end; flex-wrap:wrap; margin-top:.8rem">
+    <button type="submit">Run reviewer</button>
+  </form>
+</div>

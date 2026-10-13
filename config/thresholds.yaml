@@ -1,0 +1,55 @@
+# EntitlementShield — detector thresholds and seed feature weights.
+#
+# STUB (Phase 1 Step 0). The real contents arrive across the build:
+#   - Step 4/5: seed feature weights (docs/features.md §3 "seed wt" columns).
+#   - Step 8:   weights TUNED on the tuning split, then frozen. The frozen,
+#               firing-affecting configuration is captured in config/feature-manifest.json
+#               and hashed (docs/features.md §6). Nothing firing-affecting is
+#               mutable after the `features-frozen` tag in v1.
+#
+# Numbers already fixed in the canonical docs (not tunable — policy-versioned):
+detector:
+  score_threshold: 0.60        # policy §7; propose an action above this
+  firing_threshold: 0.05       # docs/features.md §4.1; |contribution| >= this "fires"
+
+banding:                       # docs/policy.md §4 — literal, policy-versioned
+  n_overlap_days: 3            # axis 1 concurrency
+  rate_credits_per_hour: 8     # axis 2, on >= 2 hours
+  rate_credits_per_day: 20     # axis 2, on >= 2 days
+  diurnal_cosine_D: 0.15       # axis 3 grouping distance
+  ambiguity_margin: 0.20       # of allowance
+  ambiguity_D_range: [0.12, 0.18]
+
+clustering:                    # docs/policy.md §5 — literal, policy-versioned
+  max_component_size: 50
+  hub_suppression_accounts: 20
+  signal_half_life_days: 90
+  signal_drop_days: 365
+
+policy:                        # docs/policy.md §7/§9 — literal, policy-versioned
+  min_evidence_families: 2     # §6 ≥ 2-family action gate
+  suppression_days: 60         # §9.3 reversal suppression window
+  # Excess-over-allowance → action ladder (§7). Upper bounds, inclusive.
+  ladder_light_friction_max: 0.25         # 1–25%   → light_friction
+  ladder_hold_incremental_max: 1.00       # 26–100% → hold_incremental_credits
+  #                             > 100%     → temporary_hold (human confirmation)
+
+# Feature weights (docs/features.md §3). TUNED & FROZEN at Step 8 on the tuning
+# split only (eval §9) — F-DEV-1, F-CON-1, F-DOM-1 raised (clean discriminators
+# left true positives just below 0.60; the lift recovered them at zero FP cost).
+# These mirror the `_W_*` constants in services/features.py and are captured in
+# config/feature-manifest.json (all three asserted equal by test so they never
+# drift). Nothing firing-affecting moves after the `features-frozen` tag in v1.
+feature_weights:
+  F-DEV-1: 0.45
+  F-DEV-2: 0.15
+  F-PAY-1: 0.20
+  F-CON-1: 0.25
+  F-DOM-1: 0.25
+  F-VER-1: 0.15
+  F-CYC-1: 0.30
+  F-CYC-2: 0.15
+  F-CYC-3: 0.10
+  F-CYC-4: 0.10
+  F-DOM-2: -0.15
+  F-AGE-1: -0.15
